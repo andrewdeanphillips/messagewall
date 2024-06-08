@@ -36,7 +36,19 @@ app.post("/api/messages", (request, response, next) => {
     .catch((error) => next(error));
 });
 
-/* Add like. Should this be different endpoint? */
+app.get('/api/messages/:id', (request, response, next) => {
+    Message.findById(request.params.id)
+      .then(message => {
+        if (message) {
+          response.json(message)
+        } else {
+          response.status(404).end()
+        }
+      })
+      .catch(error => next(error))
+  })
+
+/* Add a like */
 app.patch("/api/messages/:id", (request, response, next) => {
   Message.findByIdAndUpdate(
     request.params.id,
