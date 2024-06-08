@@ -45,12 +45,28 @@ const App = () => {
       });
   };
 
+  const handleLike = (id) => (event) => {
+    event.preventDefault();
+
+    messageService
+      .addLike(id)
+      .then(() => {
+        return messageService.getAll();
+      })
+      .then((updatedMessages) => {
+        setMessages(updatedMessages);
+      })
+      .catch((error) => {
+        console.error("Error liking message:", error);
+      });
+  };
+
   return (
     <div>
       <h1>Messages</h1>
       <ul>
         {messages.map((message) => (
-          <Message key={message.id} message={message} />
+          <Message key={message.id} message={message} handleLike={handleLike} />
         ))}
       </ul>
       <MessageForm
@@ -59,6 +75,7 @@ const App = () => {
         contentForm={contentForm}
         handleContentFormChange={handleContentFormChange}
         addMessage={addMessage}
+        handleLike={handleLike}
       />
     </div>
   );
