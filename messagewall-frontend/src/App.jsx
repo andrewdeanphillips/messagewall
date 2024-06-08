@@ -8,6 +8,7 @@ const App = () => {
   const [messages, setMessages] = useState([]);
   const [nameForm, setNameForm] = useState("");
   const [contentForm, setContentForm] = useState("");
+  const [selectedQuestionForm, setSelectedQuestionForm] = useState("")
 
   useEffect(() => {
     messageService.getAll().then((initialMessages) => {
@@ -23,10 +24,15 @@ const App = () => {
     setContentForm(event.target.value);
   };
 
+  const handleQuestionFormChange = (event) => {
+    setSelectedQuestionForm(event.target.value);
+  }
+
   const addMessage = (event) => {
     event.preventDefault();
 
     const newMessage = {
+      question: selectedQuestionForm,
       author: nameForm,
       content: contentForm,
     };
@@ -39,6 +45,7 @@ const App = () => {
         setMessages(updatedMessages);
         setNameForm("");
         setContentForm("");
+        setSelectedQuestionForm("bestPersonality");
       })
       .catch((error) => {
         console.error("Error adding message:", error);
@@ -74,8 +81,9 @@ const App = () => {
         handleNameFormChange={handleNameFormChange}
         contentForm={contentForm}
         handleContentFormChange={handleContentFormChange}
+        selectedQuestionForm= {selectedQuestionForm}
+        handleQuestionFormChange={handleQuestionFormChange}
         addMessage={addMessage}
-        handleLike={handleLike}
       />
     </div>
   );
