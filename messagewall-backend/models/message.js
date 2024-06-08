@@ -20,7 +20,8 @@ mongoose.connect(url)
 const messageSchema = new mongoose.Schema({
   content: String,
   author: String,
-  created_at: { type: Date, default: Date.now} 
+  created_at: { type: Date, default: Date.now},
+  likes: { type: Number, default: 0 }
 })
 
 
