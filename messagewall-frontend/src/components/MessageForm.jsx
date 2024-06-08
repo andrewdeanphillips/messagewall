@@ -27,7 +27,7 @@ const MessageForm = ({
         name: <input value={nameForm} onChange={handleNameFormChange} />
       </div>
       <div>
-        content:{" "}
+        message:{" "}
         <input value={contentForm} onChange={handleContentFormChange} />
       </div>
       <div>

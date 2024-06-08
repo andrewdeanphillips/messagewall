@@ -1,16 +1,21 @@
 const Message = ({ message, handleLike }) => {
   return (
     <li className="message">
-              <div className="message=content">
+      <div className="post-header">
+        <div className="user-info">
+          <h3>{message.author}</h3>
+          <p>Posted on: {message.created_at}</p>
+        </div>
+      </div>
+      <div className="post-content">
         <p>{message.content}</p>
       </div>
-      <div className="message-info">
-        <p>Question type: {message.question}</p>
-        <p>Author: {message.author}</p>
-        <p>Likes: {message.likes}</p>
-        <button onClick={handleLike(message.id)}>Like</button>
+      <div className="post-footer">
+        <button className="like-btn" onClick={handleLike(message.id)}>
+          Like
+        </button>
+        <span className="like-count">{message.likes} likes</span>
       </div>
-
     </li>
   );
 };
