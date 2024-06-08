@@ -2,6 +2,6 @@ POST http://localhost:3001/api/messages
 Content-Type: application/json
 
 {
-    "content": "Yet another message",
-    "author": "Robert"
+    "content": "Here we go",
+    "author": "John"
 }
