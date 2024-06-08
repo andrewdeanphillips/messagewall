@@ -1,5 +1,5 @@
 import axios from 'axios'
-const baseUrl = 'http://localhost:3001/api/messages'
+const baseUrl = '/api/messages'
 
 const getAll = () => {
     const request = axios.get(baseUrl)
