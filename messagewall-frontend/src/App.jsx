@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
-
 import Message from "./components/Message";
 import messageService from "./services/messages";
 import MessageForm from "./components/MessageForm";
+import "./App.css";
 
 const App = () => {
   const [messages, setMessages] = useState([]);
@@ -62,7 +62,7 @@ const App = () => {
   };
 
   return (
-    <div>
+    <div className="container">
       <h1>Messages</h1>
       <ul>
         {messages.map((message) => (

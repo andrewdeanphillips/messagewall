@@ -1,10 +1,15 @@
 const Message = ({ message, handleLike }) => {
   return (
     <li className="message">
-      <p>Content: {message.content}</p>
-      <p>Author: {message.author}</p>
-      <p>Likes: {message.likes}</p>
-      <button onClick={handleLike(message.id)}>Like</button>
+              <div className="message=content">
+        <p>{message.content}</p>
+      </div>
+      <div className="message-info">
+        <p>Author: {message.author}</p>
+        <p>Likes: {message.likes}</p>
+        <button onClick={handleLike(message.id)}>Like</button>
+      </div>
+
     </li>
   );
 };

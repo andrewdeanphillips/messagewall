@@ -2,13 +2,12 @@ const MessageForm = ({
         nameForm, handleNameFormChange, contentForm, handleContentFormChange, addMessage
     }) => {
     return (
-        <form onSubmit={addMessage}>
+        <form className="messageForm" onSubmit={addMessage}>
         <div>
           name: <input value={nameForm} onChange={handleNameFormChange} />
         </div>
         <div>
-          content:{" "}
-          <input value={contentForm} onChange={handleContentFormChange} />
+          content: <input value={contentForm} onChange={handleContentFormChange} />
         </div>
         <div>
           <button type="submit">submit</button>
