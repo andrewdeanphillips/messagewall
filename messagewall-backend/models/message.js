@@ -18,6 +18,7 @@ mongoose.connect(url)
   })
 
 const messageSchema = new mongoose.Schema({
+  question: { type: String },
   content: { type: String, minLength: 1, required: true },
   author: { type: String, minLength: 1, required: true },
   created_at: { type: Date, default: Date.now, required: true},

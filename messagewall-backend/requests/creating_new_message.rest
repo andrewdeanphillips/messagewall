@@ -2,6 +2,7 @@ POST http://localhost:3001/api/messages
 Content-Type: application/json
 
 {
-    "content": "Here we go",
+    "question": "aroundPeople",
+    "content": "You're great around people",
     "author": "John"
 }

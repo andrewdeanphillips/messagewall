@@ -1,3 +1,5 @@
+import questions from "../questions.json";
+
 const MessageForm = ({
   nameForm,
   handleNameFormChange,
@@ -8,14 +10,6 @@ const MessageForm = ({
 
   addMessage,
 }) => {
-  const questions = [
-    "複数の人といるとき、私はどんな存在に見えますか？",
-    "私の性格で、あなたが一番いいと思うところを教えてください。",
-    "私の性格で、就活上で気をつけたほうがいいことを教えてください。",
-    "他の人にはない、私の個性的なところを教えてください。",
-    "私に一言、応援メッセージをお願いします！",
-  ];
-
   return (
     <form className="messageForm" onSubmit={addMessage}>
       <select
@@ -24,9 +18,9 @@ const MessageForm = ({
         onChange={handleQuestionFormChange}
       >
         {questions.map((question) => (
-            <option key={question} value={question}>
-                {question}
-            </option>
+          <option key={question} value={question}>
+            {question}
+          </option>
         ))}
       </select>
       <div>

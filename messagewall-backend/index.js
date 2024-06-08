@@ -24,6 +24,7 @@ app.post("/api/messages", (request, response, next) => {
   const body = request.body;
 
   const message = new Message({
+    question: body.question,
     content: body.content,
     author: body.author,
   });

@@ -2,13 +2,17 @@ import { useState, useEffect } from "react";
 import Message from "./components/Message";
 import messageService from "./services/messages";
 import MessageForm from "./components/MessageForm";
+import questions from "./questions.json";
+
 import "./App.css";
 
 const App = () => {
   const [messages, setMessages] = useState([]);
   const [nameForm, setNameForm] = useState("");
   const [contentForm, setContentForm] = useState("");
-  const [selectedQuestionForm, setSelectedQuestionForm] = useState("")
+  const [selectedQuestionForm, setSelectedQuestionForm] = useState(
+    questions[0]
+  );
 
   useEffect(() => {
     messageService.getAll().then((initialMessages) => {
@@ -26,7 +30,7 @@ const App = () => {
 
   const handleQuestionFormChange = (event) => {
     setSelectedQuestionForm(event.target.value);
-  }
+  };
 
   const addMessage = (event) => {
     event.preventDefault();
@@ -45,7 +49,7 @@ const App = () => {
         setMessages(updatedMessages);
         setNameForm("");
         setContentForm("");
-        setSelectedQuestionForm("bestPersonality");
+        setSelectedQuestionForm(questions[0]);
       })
       .catch((error) => {
         console.error("Error adding message:", error);
@@ -68,20 +72,31 @@ const App = () => {
       });
   };
 
+  const filterMessagesByQuestion = (question) => {
+    return messages.filter((message) => message.question === question);
+  };
+
+  const renderMessages = (question) => {
+    return filterMessagesByQuestion(question).map((message) => (
+      <Message key={message.id} message={message} handleLike={handleLike} />
+    ));
+  };
+
   return (
     <div className="container">
       <h1>Messages</h1>
-      <ul>
-        {messages.map((message) => (
-          <Message key={message.id} message={message} handleLike={handleLike} />
-        ))}
-      </ul>
+      {questions.map((question) => (
+        <div key={question}>
+          <h2>{question}</h2>
+          <ul>{renderMessages(question)}</ul>
+        </div>
+      ))}
       <MessageForm
         nameForm={nameForm}
         handleNameFormChange={handleNameFormChange}
         contentForm={contentForm}
         handleContentFormChange={handleContentFormChange}
-        selectedQuestionForm= {selectedQuestionForm}
+        selectedQuestionForm={selectedQuestionForm}
         handleQuestionFormChange={handleQuestionFormChange}
         addMessage={addMessage}
       />
