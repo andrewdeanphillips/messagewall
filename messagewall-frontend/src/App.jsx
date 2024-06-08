@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 
 import Message from "./components/Message";
 import messageService from "./services/messages";
+import MessageForm from "./components/MessageForm";
 
 const App = () => {
   const [messages, setMessages] = useState([]);
@@ -17,7 +18,6 @@ const App = () => {
   const handleNameFormChange = (event) => {
     setNameForm(event.target.value);
   };
-
 
   const handleContentFormChange = (event) => {
     setContentForm(event.target.value);
@@ -53,18 +53,13 @@ const App = () => {
           <Message key={message.id} message={message} />
         ))}
       </ul>
-      <form onSubmit={addMessage}>
-        <div>
-          name: <input value={nameForm} onChange={handleNameFormChange} />
-        </div>
-        <div>
-          content:{" "}
-          <input value={contentForm} onChange={handleContentFormChange} />
-        </div>
-        <div>
-          <button type="submit">submit</button>
-        </div>
-      </form>
+      <MessageForm
+        nameForm={nameForm}
+        handleNameFormChange={handleNameFormChange}
+        contentForm={contentForm}
+        handleContentFormChange={handleContentFormChange}
+        addMessage={addMessage}
+      />
     </div>
   );
 };
