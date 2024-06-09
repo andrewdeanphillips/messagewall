@@ -13,6 +13,11 @@ const App = () => {
   const [selectedQuestionForm, setSelectedQuestionForm] = useState(
     questions[0]
   );
+  const [visibleQuestions, setViewableQuestions] = useState(
+    questions.map((q) => {
+      return { question: q, visible: true };
+    })
+  );
 
   useEffect(() => {
     messageService.getAll().then((initialMessages) => {
@@ -82,6 +87,14 @@ const App = () => {
     ));
   };
 
+  const toggleQuestionVisibility = (question) => {
+    setViewableQuestions((prevQuestions) =>
+      prevQuestions.map((q) =>
+        q.question === question ? { ...q, visible: !q.visible } : q
+      )
+    );
+  };
+
   return (
     <div className="container">
       <div>
@@ -103,10 +116,15 @@ const App = () => {
         addMessage={addMessage}
       />
       <h1>いただいた答え</h1>
-      {questions.map((question) => (
-        <div key={question}>
-          <h2>{question}</h2>
-          <ul>{renderMessages(question)}</ul>
+      {visibleQuestions.map((q) => (
+        <div key={q.question}>
+          <h2
+            onClick={() => toggleQuestionVisibility(q.question)}
+            style={{ cursor: "pointer" }}
+          >
+            {q.question}
+          </h2>
+          {q.visible && <ul>{renderMessages(q.question)}</ul>}
         </div>
       ))}
     </div>
