@@ -101,7 +101,7 @@ const App = () => {
         <h1>他己分析にご協力をお願いいたします。</h1>
         <p>
           日本で就活したいと考えていますが、他の人が私のことをどう思っているか知ることが、面接の時に役に立つかもしれません。
-          普通の応援メッセージでもいいから、とりあえず答えてください！フォームの以下にみんなの答えが見られます。
+          普通の応援メッセージでもいいから、とりあえず答えてください！フォームの下にみんなの答えが見られます。
           良いと思った回答があれば、「いいね！」を押してください。
         </p>
       </div>
@@ -120,7 +120,7 @@ const App = () => {
         <div key={q.question}>
           <h2
             onClick={() => toggleQuestionVisibility(q.question)}
-            style={{ cursor: "pointer" }}
+            style={{ cursor: "pointer", backgroundColor: "#E0FFFF" }}
           >
             {q.question}
           </h2>
