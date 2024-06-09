@@ -1,10 +1,12 @@
 const Message = ({ message, handleLike }) => {
+  const localDate = new Date(message.created_at).toLocaleString();
+  
   return (
     <li className="message">
       <div className="post-header">
         <div className="user-info">
           <h3>{message.author}</h3>
-          <p>Posted on: {message.created_at}</p>
+          <p>Posted on: {localDate}</p>
         </div>
       </div>
       <div className="post-content">
@@ -12,9 +14,9 @@ const Message = ({ message, handleLike }) => {
       </div>
       <div className="post-footer">
         <button className="like-btn" onClick={handleLike(message.id)}>
-          Like
+          いいね
         </button>
-        <span className="like-count">{message.likes} likes</span>
+        <span className="like-count">{message.likes}件</span>
       </div>
     </li>
   );

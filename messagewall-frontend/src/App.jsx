@@ -84,13 +84,10 @@ const App = () => {
 
   return (
     <div className="container">
-      <h1>Messages</h1>
-      {questions.map((question) => (
-        <div key={question}>
-          <h2>{question}</h2>
-          <ul>{renderMessages(question)}</ul>
-        </div>
-      ))}
+      <div>
+        <h1>他己分析にご協力をお願いいたします。</h1>
+      </div>
+      <h2>アンドリューについて答えて！</h2>
       <MessageForm
         nameForm={nameForm}
         handleNameFormChange={handleNameFormChange}
@@ -100,6 +97,13 @@ const App = () => {
         handleQuestionFormChange={handleQuestionFormChange}
         addMessage={addMessage}
       />
+      <h1>いただいた答え</h1>
+      {questions.map((question) => (
+        <div key={question}>
+          <h2>{question}</h2>
+          <ul>{renderMessages(question)}</ul>
+        </div>
+      ))}
     </div>
   );
 };

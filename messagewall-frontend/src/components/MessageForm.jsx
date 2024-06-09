@@ -12,6 +12,7 @@ const MessageForm = ({
 }) => {
   return (
     <form className="messageForm" onSubmit={addMessage}>
+      <h3>質問を選んでください。送信してまた違う質問に答えることは可能です。</h3>
       <select
         name="question"
         value={questionForm}
@@ -24,14 +25,15 @@ const MessageForm = ({
         ))}
       </select>
       <div>
-        name: <input value={nameForm} onChange={handleNameFormChange} />
+        <h3>ニックネーム</h3>
+        <textarea value={nameForm} onChange={handleNameFormChange} />
       </div>
       <div>
-        message:{" "}
-        <input value={contentForm} onChange={handleContentFormChange} />
+        <h3>答え</h3>
+        <textarea value={contentForm} onChange={handleContentFormChange} className="formAnswer" />
       </div>
       <div>
-        <button type="submit">submit</button>
+        <button type="submit">送信</button>
       </div>
     </form>
   );
