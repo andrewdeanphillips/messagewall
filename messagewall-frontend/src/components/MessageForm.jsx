@@ -12,7 +12,7 @@ const MessageForm = ({
 }) => {
   return (
     <form className="messageForm" onSubmit={addMessage}>
-      <h3>質問を選んでください。送信してまた違う質問に答えることは可能です。</h3>
+      <h3>質問を選んで送信してください。複数回回答することも可能です。</h3>
       <select
         name="question"
         value={questionForm}
