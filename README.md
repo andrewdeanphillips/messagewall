@@ -1,12 +1,11 @@
-# MessageWall
+# 私用他己分析
 
-MessageWall is a project consisting of a frontend built with React, a backend using Node.js with Express, and MongoDB as the database.
+私用他己分析のサイトです。
+このアイデアは、[こちら](https://job.mynavi.jp/conts/2025/analyze/)の記事からインスピレーションを得ています。
 
-- **Backend**: Node.js, Express, MongoDB (Mongoose)
-- **Frontend**: React
+メッセージウォールは、Reactを使用したフロントエンド、Expressを用いたNode.jsをベースとしたバックエンド、およびデータベースとしてMongoDBを使用して構築されたプロジェクトです。
 
-## Deployment
+- **バックエンド**: Node.js、Express、MongoDB (Mongoose)
+- **フロントエンド**: React
 
-The backend and frontend are deployed on Railway.
-
-- **Production URL**: [MessageWall on Railway](https://messagewall-production.up.railway.app/) (Work in Progress)
+- **リンク**: [messagewall](https://messagewall.up.railway.app/) (作業中)
