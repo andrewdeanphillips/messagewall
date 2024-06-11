@@ -7,36 +7,46 @@ import questions from "./questions.json";
 import "./App.css";
 
 const App = () => {
+  // メッセージの状態を管理するためのフック
   const [messages, setMessages] = useState([]);
+  // フォームの名前フィールドの状態を管理するためのフック
   const [nameForm, setNameForm] = useState("");
+  // フォームの内容フィールドの状態を管理するためのフック
   const [contentForm, setContentForm] = useState("");
+  // フォームで選択された質問の状態を管理するためのフック
   const [selectedQuestionForm, setSelectedQuestionForm] = useState(
     questions[0]
   );
+  // 表示する質問の状態を管理するためのフック
   const [visibleQuestions, setViewableQuestions] = useState(
     questions.map((q) => {
       return { question: q, visible: true };
     })
   );
 
+  // コンポーネントのマウント時にメッセージを取得するエフェクト
   useEffect(() => {
     messageService.getAll().then((initialMessages) => {
       setMessages(initialMessages);
     });
   }, []);
 
+  // 名前フォームの変更ハンドラー
   const handleNameFormChange = (event) => {
     setNameForm(event.target.value);
   };
 
+  // 内容フォームの変更ハンドラー
   const handleContentFormChange = (event) => {
     setContentForm(event.target.value);
   };
 
+  // 質問フォームの変更ハンドラー
   const handleQuestionFormChange = (event) => {
     setSelectedQuestionForm(event.target.value);
   };
 
+  // 新しいメッセージを追加する関数
   const addMessage = (event) => {
     event.preventDefault();
 
@@ -61,6 +71,7 @@ const App = () => {
       });
   };
 
+  // メッセージに「いいね」を追加する関数
   const handleLike = (id) => (event) => {
     event.preventDefault();
 
@@ -77,16 +88,19 @@ const App = () => {
       });
   };
 
+  // 質問に基づいてメッセージをフィルタリングする関数
   const filterMessagesByQuestion = (question) => {
     return messages.filter((message) => message.question === question);
   };
 
+  // 質問に基づいてメッセージをレンダリングする関数
   const renderMessages = (question) => {
     return filterMessagesByQuestion(question).map((message) => (
       <Message key={message.id} message={message} handleLike={handleLike} />
     ));
   };
 
+  // 質問の表示/非表示を切り替える関数
   const toggleQuestionVisibility = (question) => {
     setViewableQuestions((prevQuestions) =>
       prevQuestions.map((q) =>
@@ -118,10 +132,7 @@ const App = () => {
       <h1>いただいた答え</h1>
       {visibleQuestions.map((q) => (
         <div key={q.question}>
-          <h2
-            onClick={() => toggleQuestionVisibility(q.question)}
-            style={{ cursor: "pointer", backgroundColor: "#E0FFFF" }}
-          >
+          <h2 onClick={() => toggleQuestionVisibility(q.question)}>
             {q.question}
           </h2>
           {q.visible && <ul>{renderMessages(q.question)}</ul>}
