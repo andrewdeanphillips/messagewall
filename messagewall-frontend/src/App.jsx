@@ -109,6 +109,32 @@ const App = () => {
     );
   };
 
+  const setAllQuestionsTo = (boolValue) => {
+    setViewableQuestions((prevQuestions) =>
+      prevQuestions.map((q) => ({
+        ...q,
+        visible: boolValue,
+      }))
+    );
+  };
+
+  const handleVisibleQuestionsChange = (event) => {
+    const selection = event.target.value;
+
+    setSelectedQuestionForm(selection);
+
+    if (selection === "all") {
+      setAllQuestionsTo(true);
+    } else {
+      setViewableQuestions((prevQuestions) =>
+        prevQuestions.map((q) => ({
+          ...q,
+          visible: q.question === selection,
+        }))
+      );
+    }
+  };
+
   return (
     <div className="container">
       <div>
@@ -130,6 +156,21 @@ const App = () => {
         addMessage={addMessage}
       />
       <h1>いただいた答え</h1>
+      <h3>フィルター</h3>
+      <select
+        name="visibleQuestions"
+        value={selectedQuestionForm}
+        onChange={handleVisibleQuestionsChange}
+      >
+        <option key="all" value="all">
+          全部
+        </option>
+        {questions.map((question) => (
+          <option key={question} value={question}>
+            {question}
+          </option>
+        ))}
+      </select>
       {visibleQuestions.map((q) => (
         <div key={q.question}>
           <h2 onClick={() => toggleQuestionVisibility(q.question)}>

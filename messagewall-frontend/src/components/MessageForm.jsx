@@ -4,7 +4,7 @@ const MessageForm = ({
   nameForm,
   handleNameFormChange,
   contentForm,
-  questionForm,
+  selectedQuestionForm,
   handleQuestionFormChange,
   handleContentFormChange,
 
@@ -15,7 +15,7 @@ const MessageForm = ({
       <h3>質問を選んで送信してください。複数回回答することも可能です。</h3>
       <select
         name="question"
-        value={questionForm}
+        value={selectedQuestionForm}
         onChange={handleQuestionFormChange}
       >
         {questions.map((question) => (
