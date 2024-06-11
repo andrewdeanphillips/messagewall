@@ -17,12 +17,16 @@ const App = () => {
   const [selectedQuestionForm, setSelectedQuestionForm] = useState(
     questions[0]
   );
+
+
   // 表示する質問の状態を管理するためのフック
   const [visibleQuestions, setViewableQuestions] = useState(
     questions.map((q) => {
       return { question: q, visible: true };
     })
   );
+
+  const [selectedFilter, setSelectedFilter] = useState("all")
 
   // コンポーネントのマウント時にメッセージを取得するエフェクト
   useEffect(() => {
@@ -120,8 +124,7 @@ const App = () => {
 
   const handleVisibleQuestionsChange = (event) => {
     const selection = event.target.value;
-
-    setSelectedQuestionForm(selection);
+    setSelectedFilter(selection)
 
     if (selection === "all") {
       setAllQuestionsTo(true);
@@ -159,7 +162,7 @@ const App = () => {
       <h3>フィルター</h3>
       <select
         name="visibleQuestions"
-        value={selectedQuestionForm}
+        value={selectedFilter}
         onChange={handleVisibleQuestionsChange}
       >
         <option key="all" value="all">
@@ -173,9 +176,11 @@ const App = () => {
       </select>
       {visibleQuestions.map((q) => (
         <div key={q.question}>
-          <h2 onClick={() => toggleQuestionVisibility(q.question)}>
-            {q.question}
-          </h2>
+          <div className="questionTitle">
+            <h2 onClick={() => toggleQuestionVisibility(q.question)}>
+              {q.question}
+            </h2>
+          </div>
           {q.visible && <ul>{renderMessages(q.question)}</ul>}
         </div>
       ))}

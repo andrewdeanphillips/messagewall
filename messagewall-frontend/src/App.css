@@ -150,3 +150,13 @@ ul {
     font-size: 14px;
     color: #666666;
 }
+
+.questionTitle {
+    background-color: #eee;
+    cursor: pointer;
+
+}
+
+.active, .questionTitle:hover {
+    background-color: #ccc;
+  }
