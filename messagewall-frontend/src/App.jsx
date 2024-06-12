@@ -100,6 +100,7 @@ const App = () => {
     );
   };
 
+  // すべての質問を指定されたbool値に設定する
   const setAllQuestionsTo = (boolValue) => {
     setViewableQuestions((prevQuestions) =>
       prevQuestions.map((q) => ({
@@ -109,13 +110,15 @@ const App = () => {
     );
   };
 
+  // 選択されたフィルターに応じて質問の表示を変更する
   const handleVisibleQuestionsChange = (event) => {
     const selection = event.target.value;
     setSelectedFilter(selection);
-
+    // 全ての質問を表示する
     if (selection === "all") {
       setAllQuestionsTo(true);
     } else {
+      // 選択された質問のみを表示する
       setViewableQuestions((prevQuestions) =>
         prevQuestions.map((q) => ({
           ...q,
