@@ -1,10 +1,10 @@
 import { useState, useEffect } from "react";
-import Message from "./components/Message";
 import messageService from "./services/messages";
 import MessageForm from "./components/MessageForm";
 import questions from "./questions.json";
 
 import "./App.css";
+import RecievedResponses from "./components/RecievedResponses";
 
 const App = () => {
   // メッセージの状態を管理するためのフック
@@ -18,7 +18,6 @@ const App = () => {
     questions[0]
   );
 
-
   // 表示する質問の状態を管理するためのフック
   const [visibleQuestions, setViewableQuestions] = useState(
     questions.map((q) => {
@@ -26,7 +25,7 @@ const App = () => {
     })
   );
 
-  const [selectedFilter, setSelectedFilter] = useState("all")
+  const [selectedFilter, setSelectedFilter] = useState("all");
 
   // コンポーネントのマウント時にメッセージを取得するエフェクト
   useEffect(() => {
@@ -92,18 +91,6 @@ const App = () => {
       });
   };
 
-  // 質問に基づいてメッセージをフィルタリングする関数
-  const filterMessagesByQuestion = (question) => {
-    return messages.filter((message) => message.question === question);
-  };
-
-  // 質問に基づいてメッセージをレンダリングする関数
-  const renderMessages = (question) => {
-    return filterMessagesByQuestion(question).map((message) => (
-      <Message key={message.id} message={message} handleLike={handleLike} />
-    ));
-  };
-
   // 質問の表示/非表示を切り替える関数
   const toggleQuestionVisibility = (question) => {
     setViewableQuestions((prevQuestions) =>
@@ -124,7 +111,7 @@ const App = () => {
 
   const handleVisibleQuestionsChange = (event) => {
     const selection = event.target.value;
-    setSelectedFilter(selection)
+    setSelectedFilter(selection);
 
     if (selection === "all") {
       setAllQuestionsTo(true);
@@ -148,7 +135,6 @@ const App = () => {
           良いと思った回答があれば、「いいね！」を押してください。
         </p>
       </div>
-      <h2>アンドリューについて答えて！</h2>
       <MessageForm
         nameForm={nameForm}
         handleNameFormChange={handleNameFormChange}
@@ -158,32 +144,15 @@ const App = () => {
         handleQuestionFormChange={handleQuestionFormChange}
         addMessage={addMessage}
       />
-      <h1>いただいた答え</h1>
-      <h3>フィルター</h3>
-      <select
-        name="visibleQuestions"
-        value={selectedFilter}
-        onChange={handleVisibleQuestionsChange}
-      >
-        <option key="all" value="all">
-          全部
-        </option>
-        {questions.map((question) => (
-          <option key={question} value={question}>
-            {question}
-          </option>
-        ))}
-      </select>
-      {visibleQuestions.map((q) => (
-        <div key={q.question}>
-          <div className="questionTitle">
-            <h2 onClick={() => toggleQuestionVisibility(q.question)}>
-              {q.question}
-            </h2>
-          </div>
-          {q.visible && <ul>{renderMessages(q.question)}</ul>}
-        </div>
-      ))}
+      <RecievedResponses
+        questions={questions}
+        messages={messages}
+        handleLike={handleLike}
+        toggleQuestionVisibility={toggleQuestionVisibility}
+        visibleQuestions={visibleQuestions}
+        selectedFilter={selectedFilter}
+        handleVisibleQuestionsChange={handleVisibleQuestionsChange}
+      />
     </div>
   );
 };
